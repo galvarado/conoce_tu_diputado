@@ -7,19 +7,28 @@ from django.template import RequestContext
 from django.db.models import Q
 
 def index(request):
+    '''
+    Show index page
+    '''
     return render_to_response('index.html', RequestContext(request))
+
+def map(request):
+    '''
+    Show map page
+    '''
+    return render_to_response('map.html', RequestContext(request))
 
 def get_deputies(request):
     '''
     Retrive deputies table
     '''
     aaData = []
-    start = request.POST.get('iDisplayStart')
-    display_length = request.POST.get('iDisplayLength')
-    end = start + display_length
+    start = 0
+    display_length = 0
+    end = 0
     search = request.POST.get('sSearch')
     users = []
-    count = users.count()
+    count = 0
 
     for user in users[start:end]:
         group = 'Sin asignar' if user.profile.group is None else user.profile.group.name
@@ -32,7 +41,7 @@ def get_deputies(request):
     data = {
         "iTotalRecords": count,
         "iDisplayStart": start,
-        "iDisplayLength": 0,
+        "iDisplayLength": display_length,
         "iTotalDisplayRecords": count,
         "aaData":aaData
     }

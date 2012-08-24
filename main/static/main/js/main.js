@@ -28,10 +28,9 @@ $(function() {
       "sUrl": STATIC_URL + "main/js/libs/dataTables.spanish.txt"
     },
     "aoColumns": [
-        { "sWidth": "32%" },
-        { "sWidth": "32%" },
-        { "sWidth": "32%" },
-        { "sWidth": "2%" },
+        { "sWidth": "60%" },
+        { "sWidth": "15%" },
+        { "sWidth": "10%" },
     ],
     // Fill the table with ajax source
     "fnServerData": function ( sSource, aoData, fnCallback ) {
@@ -52,5 +51,8 @@ $(function() {
     var id= $(this).attr('id');
     var state = $.inArray(id,states);
     $('#info').html(state_names[state]);
+    $('#deputies-datatable_filter input').val(state_names[state]);
+    // Show table results
+    $('#right-panel').show();
   });
 });
