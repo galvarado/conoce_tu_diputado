@@ -9,6 +9,16 @@
     </script>
   </head>
   <body>
+    <div class="navbar">
+      <div class="navbar-inner">
+        <a class="brand" href="#">Conoce a tu Diputado</a>
+        <ul class="nav">
+          <li class="active"><a href="{% url index %}">Inicio</a></li>
+          <li><a href="#">Busqueda Inteligente</a></li>
+          <li><a href="{% url map %}">Mapa Interactivo</a></li>
+        </ul>
+      </div>
+    </div>
     {% block main-content %}{% endblock %}
     <!-- Javascript libraries imports -->
     {% block js %}
