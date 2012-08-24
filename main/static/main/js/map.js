@@ -51,7 +51,7 @@ $(function() {
     var id= $(this).attr('id');
     var state = $.inArray(id,states);
     $('#info').html(state_names[state]);
-    $('#deputies-datatable_filter input').val(state_names[state]);
+    datatable.fnFilter(state_names[state]);
     // Show table results
     $('#deputies-table').show();
   });

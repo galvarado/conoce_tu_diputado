@@ -8,6 +8,8 @@ urlpatterns = patterns('main.views',
     url(r'^$', 'index', name='index'),
     url(r'^map/?$', 'map', name='map'),
     url(r'^map/get_deputies/?$', 'get_deputies', name='get_deputies'),
+    url(r'^search/?$', 'search', name='search'),
+    url(r'^search/get_deputies$', 'get_deputies_search', name='get_deputies_search'),
     # Urls to django admin
     url(r'^admin/', include(admin.site.urls)),
 )
