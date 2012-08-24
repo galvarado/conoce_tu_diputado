@@ -5,6 +5,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('main.views',
     url(r'^$', 'index', name='index'),
+    url(r'^get_deputies/?$', 'get_deputies', name='get_deputies'),
     # Urls to django admin    
     url(r'^admin/', include(admin.site.urls)),
 )

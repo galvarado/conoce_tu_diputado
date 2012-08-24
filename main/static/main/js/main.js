@@ -17,16 +17,40 @@ var state_names = [
   'Sonora','Tabasco','Tamaulipas','Tlaxcala','Veracruz','Yucatán','Zacatecas'
 ];
 $(function() {
+  // Initialize table
+  datatable = $('#deputies-datatable').dataTable({
+    "sDom": "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>",
+    "sPaginationType": "bootstrap",
+    "bProcessing": true,
+    "sAjaxSource": "/get_deputies",
+    "bServerSide": true,
+    "oLanguage": {
+      "sUrl": STATIC_URL + "main/js/libs/dataTables.spanish.txt"
+    },
+    "aoColumns": [
+        { "sWidth": "32%" },
+        { "sWidth": "32%" },
+        { "sWidth": "32%" },
+        { "sWidth": "2%" },
+    ],
+    // Fill the table with ajax source
+    "fnServerData": function ( sSource, aoData, fnCallback ) {
+      $.ajax({
+        "dataType": 'json',
+        "type": "POST",
+        "url": sSource,
+        "data": aoData,
+        "success": fnCallback
+      });
+    }
+  });
   // Activate map highlight funcionality
   $('#map').maphilight();
   // When user is over an state
-  $('.area').hover(function() {
+  $('.area').click(function() {
     // Obtain name of state dependind his id and put it in the info div
     var id= $(this).attr('id');
     var state = $.inArray(id,states);
     $('#info').html(state_names[state]);
-  }, function(){
-    // Erase info div when user leave an state
-    $('#info').html('');
   });
 });
