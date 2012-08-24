@@ -1,6 +1,11 @@
 @import "bootstrap/bootstrap.less";
 @import "bootstrap/responsive.less";
 /* ========== Primary Styles ========== */
+
+.navbar {
+  margin-bottom: 0 !important;
+}
+
 #info {
   color: @purple;
   z-index: 2;
@@ -43,6 +48,17 @@ h2 {
   }
 }
 
+.panel {
+  width: 90%;
+  heigth: auto;
+  margin: 0 auto;
+  clear: both;
+  h2, h3 {
+    padding: 2px;
+    margin: 0 10px 0 10px;
+  }
+}
+
 #main-buttons {
   padding-top: 50px;
 }
@@ -51,10 +67,32 @@ h2 {
   display: none;
 }
 
-#deputies-datatable_filter {
+#deputies-datatable_filter, #deputies-search-datatable_filter {
+display: none;
 }
 
-#deputies-datatable_length {
+#specific-search {
+  width: 70%;
+  height: 40px;
+  font-size: 25px;
+  text-align: center;
+  margin-left: 15%;
+}
+
+#political-groups {
+  height: auto;
+  width:70%;
+  margin: 0 auto;
+  margin-bottom: 50px;
+  img {
+    height: 100px;
+    width: 100px;
+    float: left;
+    padding: 10px;
+  }
+}
+
+#deputies-datatable_length, #deputies-search-datatable_length {
   display: none;
 }
 
