@@ -67,7 +67,8 @@ def get_deputies_search(request):
 
         search = search.split(' ')
 
-        fields = ('sex', 'name', 'lastname', 'party', 'election_type', 'entity', 'district', 'circunscription', 'phone', 'extension', 'email', 'twitter', 'commissions', 'bio', 'patrimony', 'answer', 'answer_why', 'suplent', 'status')
+        #fields = ('sex', 'name', 'lastname', 'party', 'election_type', 'entity', 'district', 'circunscription', 'phone', 'extension', 'email', 'twitter', 'commissions', 'bio', 'patrimony', 'answer', 'answer_why', 'suplent', 'status')
+        fields = ('sex', 'name', 'lastname', 'party', 'election_type', 'entity', 'district', 'phone', 'email', 'twitter', 'commissions')
 
         # Query to filter records
         _query = """SELECT * FROM main_representative WHERE 1"""
@@ -83,18 +84,19 @@ def get_deputies_search(request):
                 if i > 0:
                     _query += " OR "
 
-                _query += field + " LIKE %s"
-                args_to_append.append(arg)
+                _query += field + " LIKE '%%" + arg + "%%'"
+                #args_to_append.append(arg)
                 i = i + 1
 
             _query += """)"""
 
-        _query += """ LIMIT %s,%s"""
+        _query += " LIMIT " + start + "," + end
 
-        args_to_append.append(start)
-        args_to_append.append(end)
+        #args_to_append.append(start)
+        #args_to_append.append(end)
 
         representatives = Representative.objects.raw(_query, args_to_append)
+
         # Query to obtain total count
         _query = """SELECT * FROM main_representative"""
         count = len(list(Representative.objects.raw(_query)))
