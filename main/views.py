@@ -105,8 +105,24 @@ def get_deputies_search(request):
         representatives = Representative.objects.raw(_query, args_to_append)
 
         # Query to obtain total count
-        _query = """SELECT * FROM main_representative"""
-        count = len(list(Representative.objects.raw(_query)))
+        _query = """SELECT * FROM main_representative WHERE 1"""
+
+        for arg in search:
+            _query += """ AND ("""
+
+            i = 0
+
+            for field in fields:
+                if i > 0:
+                    _query += " OR "
+
+                _query += field + " LIKE '%%" + arg + "%%'"
+                #args_to_append.append(arg)
+                i = i + 1
+
+            _query += """)"""
+
+        count = len(list(Representative.objects.raw(_query, args_to_append)))
         for representative in representatives:
             aaData.append([
                 '%s %s' % (representative.name, representative.lastname),
