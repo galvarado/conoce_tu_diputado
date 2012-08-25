@@ -3,7 +3,7 @@
 <div id='content'>
   <div class="well">
     <h1>¿Sabes quién te representa en la cámara de Diputados?</h1>
-    <h2>Haz una búsqueda combinando tus criterios</h2>
+    <h2>Contacta a tu diputado</h2>
   </div>
   <div class="hero-unit">
     <h1>{{ representative.name }} {{ representative.lastname }}<h1>
@@ -23,26 +23,24 @@
         De <b>{{ representative.entity }}</b>
         {% endif %}
       </p>
+      {% if representative.bio %}
+      <h2>Biografía</h2><p> {{ representative.bio }}</p>
+      {% endif%}
+      {% if representative.commissions %}
+      <h2>Comisiones</h2><p>{{ representative.commissions }}</p>
+      {% endif %}
+      <h2>Contactar</h2>
       <p>
-        {% if representative.bio %}
-        Biografía: <b>{{ representative.bio }}</b>
-        {% endif%}
-      </p>
-      <p>
-        {% if representative.commissions %}
-        Participa en las comisiones de: <b>{{ representative.commissions }}</b>
+        {% if representative.phone %}
+        <img src="{{ STATIC_URL }}main/images/phone.png"/>{{ representative.phone }} Ext {{ representative.extension }}
+        {% endif %}
+        {% if representative.email %}
+        <img src="{{ STATIC_URL }}main/images/mail.png"/>{{ representative.email }}
+        {% endif %}
+        {% if representative.twitter %}
+        <img src="{{ STATIC_URL }}main/images/twitter_purple.png"/>{{ representative.twitter }}
         {% endif %}
       </p>
-      <h2>Contactar</h2>
-      {% if representative.phone %}
-      <p>Teléfono:{{ representative.phone }} Ext {{ representative.extension }}</p>
-      {% endif %}
-      {% if representative.email %}
-      <p>Correo:{{ representative.email }}</p>
-      {% endif %}
-      {% if representative.twitter %}
-      <p>Twitter:{{ representative.twitter }}</p>
-      {% endif %}
   </div>
 </div>
 {% endblock %}
