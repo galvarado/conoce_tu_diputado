@@ -32,6 +32,7 @@ $(function() {
     datatable.fnFilter($(this).val());
   });
   $('.image-to-search').live('click', function() {
+    $('input').val('');
     datatable.fnFilter($(this).attr('alt'));
   });
 });
