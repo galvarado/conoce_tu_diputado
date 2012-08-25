@@ -3,7 +3,7 @@ import json
 import operator
 
 from django.shortcuts import render_to_response, redirect
-from django.http import HttpResponseRedirect, HttpResponse 
+from django.http import HttpResponseRedirect, HttpResponse
 from django.template import RequestContext
 from django.db.models import Q
 
@@ -65,22 +65,57 @@ def get_deputies_search(request):
     end = display_length
     search = request.POST.get('sSearch', None)
     if search:
+
+        search = search.split(' ')
+
+        fields = ('sex', 'name', 'lastname', 'party', 'election_type', 'entity', 'district', 'circunscription', 'phone', 'extension', 'email', 'twitter', 'commissions', 'bio', 'patrimony', 'answer', 'answer_why', 'suplent', 'status')
+
         # Query to filter records
-        arg1 = '%' + 'david' + '%'
-        arg2 = '%' + 'jalisco' + '%'
-        _query = """SELECT * FROM main_representative WHERE
-        (main_representative.entity LIKE %s OR
-        main_representative.name LIKE %s) AND
-        (main_representative.entity LIKE %s OR
-        main_representative.name LIKE %s) LIMIT %s, %s"""
-        representatives = Representative.objects.raw(_query, [arg1, arg1, arg2, arg2, start, end])
+        _query = """SELECT * FROM main_representative WHERE 1"""
+
+        args_to_append = []
+
+        for arg in search:
+            _query += """ AND ("""
+
+            i = 0
+
+            for field in fields:
+                if i > 0:
+                    _query += " OR "
+
+                _query += field + " LIKE %s"
+                args_to_append.append(arg)
+                i = i + 1
+
+            _query += """)"""
+
+        _query += """ LIMIT %s,%s"""
+
+        args_to_append.append(start)
+        args_to_append.append(end)
+
+        representatives = Representative.objects.raw(_query, args_to_append)
         # Query to obtain total count
-        _query = """SELECT * FROM main_representative WHERE
-        (main_representative.entity LIKE %s OR
-        main_representative.name LIKE %s) AND
-        (main_representative.entity LIKE %s OR
-        main_representative.name LIKE %s)"""
-        count = len(list(Representative.objects.raw(_query, [arg1, arg1, arg2, arg2])))
+        _query = """SELECT * FROM main_representative WHERE 1"""
+
+        args_to_append = []
+
+        for arg in search:
+            _query += """ AND ("""
+
+            i = 0
+
+            for field in fields:
+                if i > 0:
+                    _query += " OR "
+
+                _query += field + " LIKE %s"
+                args_to_append.append(arg)
+                i = i + 1
+
+            _query += """)"""
+        count = len(list(Representative.objects.raw(_query, args_to_append)))
         for representative in representatives:
             aaData.append([
                 '%s %s' % (representative.name, representative.lastname),
