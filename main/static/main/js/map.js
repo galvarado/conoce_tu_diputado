@@ -22,7 +22,7 @@ $(function() {
     "sDom": "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>",
     "sPaginationType": "bootstrap",
     "bProcessing": true,
-    "sAjaxSource": "search/get_deputies",
+    "sAjaxSource": "map/get_deputies",
     "bServerSide": true,
     "oLanguage": {
       "sUrl": STATIC_URL + "main/js/libs/dataTables.spanish.txt"

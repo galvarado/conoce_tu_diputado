@@ -1,7 +1,7 @@
 # coding: utf-8
 import json
 
-from django.shortcuts import render_to_response, redirect
+from django.shortcuts import render_to_response, redirect, get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponse 
 from django.template import RequestContext
 from django.db.models import Q
@@ -37,7 +37,7 @@ def get_deputies(request):
             '%s %s' % (representative.name, representative.lastname),
             representative.district,
             representative.party,
-            '<a><img class=contact src=static/main/images/contact_icon.jpg /></a>',
+            '<a href="/detail/%s/"><img class=contact src=static/main/images/contact_icon.jpg /></a>' % representative.pk,
         ])
     data = {
         'iTotalRecords': count,
@@ -87,7 +87,7 @@ def get_deputies_search(request):
                 representative.entity,
                 representative.district,
                 representative.election_type,
-                '<a><img class=contact src=static/main/images/contact_icon.jpg /></a>',
+                '<a href="/detail/%s/"><img class=contact src=static/main/images/contact_icon.jpg /></a>' % representative.pk,
             ])
 
     else:
@@ -101,7 +101,7 @@ def get_deputies_search(request):
                 representative.entity,
                 representative.district,
                 representative.election_type,
-                '<a><img class=contact src=static/main/images/contact_icon.jpg /></a>',
+                '<a href="/detail/%s/"><img class=contact src=static/main/images/contact_icon.jpg /></a>' % representative.pk,
             ])
 
     data = {
@@ -112,3 +112,12 @@ def get_deputies_search(request):
         'aaData':aaData
     }
     return HttpResponse(json.dumps(data))
+
+def detail(request, id):
+    '''
+    Display deputy detail
+    '''
+    representative = get_object_or_404(Representative, pk=id)
+    return render_to_response('detail.html', RequestContext(request, {
+        'representative': representative,
+    }))
