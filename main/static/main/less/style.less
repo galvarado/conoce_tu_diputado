@@ -48,6 +48,17 @@ h2 {
   }
 }
 
+.center-panel2 {
+  width: 30%;
+  heigth: auto;
+  margin: 0 auto;
+  clear: both;
+  h2, h3 {
+    padding: 2px;
+    margin: 0 10px 0 10px;
+  }
+}
+
 .panel {
   width: 90%;
   heigth: auto;
@@ -113,4 +124,36 @@ display: none;
 .dataTables_paginate {
   margin: 0;
   float: right;
+}
+
+#login {
+  .border-radius(6px 6px 6px 6px);
+  .box-shadow(0 0 5px @black);
+  height: 300px;
+  margin: 100px auto;
+  width: 350px;
+  .form-control {
+    margin: 0 auto;
+    width: 220px;
+  }
+}
+
+.login-header {
+  color: @gray;
+  height: 20%;
+  h2 {
+    text-align: center;
+  }
+}
+
+.login-body {
+  height: 60%;
+}
+
+.login-footer {
+  height: 20%;
+  button {
+    float: right;
+    margin: 15px;
+  }
 }
