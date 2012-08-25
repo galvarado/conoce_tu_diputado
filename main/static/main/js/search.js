@@ -31,4 +31,7 @@ $(function() {
   $('#specific-search').keyup(function(){
     datatable.fnFilter($(this).val());
   });
+  $('.image-to-search').live('click', function() {
+    datatable.fnFilter($(this).attr('alt'));
+  });
 });
