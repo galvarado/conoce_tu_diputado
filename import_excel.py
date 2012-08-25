@@ -2,10 +2,10 @@ import os
 from main.models import Representative
 import xlrd
 
-def import_file():
+def import_file(file_name):
     HEADER_ROW = 1
 
-    book = xlrd.open_workbook('fichas_diputados.xls', encoding_override='cp1252')
+    book = xlrd.open_workbook('%s' % file_name, encoding_override='cp1252')
     sh = book.sheet_by_index(0)
     header_row = sh.row(HEADER_ROW)
     if(sh.nrows > 1):

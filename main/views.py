@@ -1,5 +1,6 @@
 # coding: utf-8
 import json
+import os
 
 from django.shortcuts import render_to_response, redirect, get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponse 
@@ -12,6 +13,7 @@ from django.core.urlresolvers import reverse
 
 from main.models import Representative, DataBaseFile
 from main.forms import DataBaseFileForm
+import import_excel
 
 def index(request):
     '''
@@ -194,9 +196,11 @@ def change_db(request):
         form = DataBaseFileForm(request.POST, request.FILES)
         if form.is_valid():
             DataBaseFile.objects.all().delete()
+            filelist = [ f for f in os.listdir(".") if f.endswith(".xls") ]
+            for f in filelist:
+                os.remove(f)
             content = form.save()
-            import import_excel
-            import_excel.import_file() 
+            import_excel.import_file(content.file_name()) 
             return HttpResponseRedirect(reverse('manage'))
     return render_to_response('change_db.html', RequestContext(request, {
         'form': form,
