@@ -10,6 +10,7 @@ urlpatterns = patterns('main.views',
     url(r'^map/get_deputies/?$', 'get_deputies', name='get_deputies'),
     url(r'^search/?$', 'search', name='search'),
     url(r'^search/get_deputies$', 'get_deputies_search', name='get_deputies_search'),
+    url(r'^detail/(?P<id>\d+)/$', 'detail', name='detail'),
     # Urls to django admin
     url(r'^admin/', include(admin.site.urls)),
 )

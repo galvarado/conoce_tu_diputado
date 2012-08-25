@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block main-content %}
+<div id='content'>
+  <div class="well">
+    <h1>¿Sabes quién te representa en la cámara de Diputados?</h1>
+    <h2>Haz una búsqueda combinando tus criterios</h2>
+  </div>
+  <div class="hero-unit">
+    <h1>{{ representative.name }} {{ representative.lastname }}<h1>
+      <p>
+        {% if representative.party %}
+        Diputado por el <b>{{ representative.party }}.</b>
+        {% endif %}
+        {% if representative.election_type %}
+        Electo mediante <b>{{ representative.election_type }}</b>
+        {% endif %}
+      <p>
+      <p>
+        {% if representative.district %}
+        Representa el distrito <b>{{ representative.district }}</b>
+        {% endif %}
+        {% if representative.entity %}
+        De <b>{{ representative.entity }}</b>
+        {% endif %}
+      </p>
+      <p>
+        {% if representative.bio %}
+        Biografía: <b>{{ representative.bio }}</b>
+        {% endif%}
+      </p>
+      <p>
+        {% if representative.commissions %}
+        Participa en las comisiones de: <b>{{ representative.commissions }}</b>
+        {% endif %}
+      </p>
+      <h2>Contactar</h2>
+      {% if representative.phone %}
+      <p>Teléfono:{{ representative.phone }} Ext {{ representative.extension }}</p>
+      {% endif %}
+      {% if representative.email %}
+      <p>Correo:{{ representative.email }}</p>
+      {% endif %}
+      {% if representative.twitter %}
+      <p>Twitter:{{ representative.twitter }}</p>
+      {% endif %}
+  </div>
+</div>
+{% endblock %}
+{% block js %}
+{{ block.super }}
+<script src="{{ STATIC_URL }}main/js/detail.js"></script>
+{% endblock js %}
