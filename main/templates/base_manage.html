@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Conoce a tu Diputado</title>
+    <link rel="stylesheet/less" href="{{ STATIC_URL }}main/less/style.less">
+    <script src="{{ STATIC_URL }}main/js/libs/less-1.3.0.min.js"></script>
+    <script>
+    var STATIC_URL = '{{ STATIC_URL }}';
+    </script>
+  </head>
+  <body>
+    <div class="navbar">
+      <div class="navbar-inner">
+        <a class="brand" href="{% url index %}">Conoce a tu Diputado</a>
+        <ul class="nav">
+          {% url manage  as url %}
+          <li {% if request.path == url %}class="active"{% endif %}>
+            <a href="{{ url }}">
+              Inicio
+            </a>
+          </li>
+          {% url change_db as url %}
+          <li {% if request.path == url %}class="active"{% endif %}>
+            <a href="{{ url }}">
+              Cambiar Base de Datos
+            </a>
+          </li>
+          {% url logout as url %}
+          <li>
+            <a href="{{ url }}">
+              Cerrar sesión
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    {% block main-content %}{% endblock %}
+    <!-- Javascript libraries imports -->
+    {% block js %}
+    <script src="{{ STATIC_URL }}main/js/libs/jquery-1.7.2.min.js"></script>
+    <script src="{{ STATIC_URL }}main/js/libs/jquery.dataTables.min.js"></script>
+    <script src="{{ STATIC_URL }}main/js/libs/bootstrap/bootstrap.js"></script>
+    <script src="{{ STATIC_URL }}main/js/libs/bootstrap/dataTables.bootstrap-plugin.js"></script>
+    <script src="{{ STATIC_URL }}main/js/libs/ajax.csrf.js"></script>
+    <script src="{{ STATIC_URL }}main/js/libs/jquery.maphighlight.min.js"></script>
+    {% endblock js %}
+
+    {% block footer %}{% endblock footer %}
+  </body>
+</html>

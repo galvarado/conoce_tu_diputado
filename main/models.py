@@ -1,7 +1,5 @@
 from django.db import models
 
-# Create your models here.
-
 class Representative(models.Model):
     sex = models.CharField(max_length=300, blank=True)
     name = models.CharField(max_length=300, blank=True)
@@ -22,3 +20,10 @@ class Representative(models.Model):
     answer_why = models.TextField(blank=True)
     suplent = models.CharField(max_length=300, blank=True)
     status = models.CharField(max_length=300, blank=True)
+
+class DataBaseFile(models.Model):
+    def __unicode__(self):
+        return self.title
+
+    title = models.CharField(max_length=100, verbose_name="Titulo")
+    content_file = models.FileField(upload_to='.', verbose_name="Archivo")
