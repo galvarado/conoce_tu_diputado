@@ -147,8 +147,6 @@ def get_deputies_search(request):
         'aaData':aaData
     }
     return HttpResponse(json.dumps(data))
-<<<<<<< HEAD
-=======
 
 def detail(request, id):
     '''
@@ -158,4 +156,3 @@ def detail(request, id):
     return render_to_response('detail.html', RequestContext(request, {
         'representative': representative,
     }))
->>>>>>> 1a403081be6837d345fedf42c7152d56de2d1c7f
