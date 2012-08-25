@@ -15,6 +15,7 @@ $(function() {
         { "sWidth": "15%" },
         { "sWidth": "15%" },
         { "sWidth": "15%" },
+        { "sWidth": "15%" },
     ],
     // Fill the table with ajax source
     "fnServerData": function ( sSource, aoData, fnCallback ) {
@@ -26,5 +27,8 @@ $(function() {
         "success": fnCallback
       });
     }
+  });
+  $('#specific-search').keyup(function(){
+    datatable.fnFilter($(this).val());
   });
 });

@@ -10,9 +10,9 @@ var states = [
 ];
 // State Names
 var state_names = [
-  'Aguascalientes', 'Baja California Norte', 'Baja California Sur', 'Campeche',
+  'Aguascalientes', 'Baja California', 'Baja California Sur', 'Campeche',
   'Chihuahua','Chiapas','Coahuila','Colima','Distrito Federal','Durango','Guerrero',
-  'Guanajuato','Hidalgo','Jalisco','Edo. Mexico','Michoacán','Morelos','Nayarit',
+  'Guanajuato','Hidalgo','Jalisco','México','Michoacán','Morelos','Nayarit',
   'Nuevo León','Oaxaca','Puebla','Queretaro','Quintana Roo','Sinaloa','San Luis Potosí',
   'Sonora','Tabasco','Tamaulipas','Tlaxcala','Veracruz','Yucatán','Zacatecas'
 ];
@@ -22,15 +22,16 @@ $(function() {
     "sDom": "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>",
     "sPaginationType": "bootstrap",
     "bProcessing": true,
-    "sAjaxSource": "map/get_deputies",
+    "sAjaxSource": "search/get_deputies",
     "bServerSide": true,
     "oLanguage": {
       "sUrl": STATIC_URL + "main/js/libs/dataTables.spanish.txt"
     },
     "aoColumns": [
-        { "sWidth": "60%" },
-        { "sWidth": "15%" },
-        { "sWidth": "10%" },
+        { "sWidth": "75" },
+        { "sWidth": "5%" },
+        { "sWidth": "20%" },
+        { "sWidth": "1%" },
     ],
     // Fill the table with ajax source
     "fnServerData": function ( sSource, aoData, fnCallback ) {
